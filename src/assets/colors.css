@@ -1,0 +1,57 @@
+:root {
+  --primary-900: #4c68d5;
+  --primary-800: #6174d9;
+  --primary-700: #7381dd;
+  --primary-600: #858ee1;
+  --primary-500: #959ce5;
+  --primary-400: #a5a9e9;
+  --primary-300: #b4b7ed;
+  --primary-200: #c3c5f1;
+  --primary-100: #e1e2f8;
+
+  --neutral-black-900: #0c1024;
+  --neutral-black-800: #27364b;
+  --neutral-black-700: #39465a;
+  --neutral-black-600: #4b5669;
+  --neutral-black-500: #5d6778;
+  --neutral-black-400: #707988;
+  --neutral-black-300: #838b98;
+  --neutral-black-200: #979da9;
+  --neutral-black-100: #abb0b9;
+
+  --neutral-white-900: #ffffff;
+  --neutral-white-400: #e2e8f0;
+  --neutral-white-300: #ecf0f5;
+  --neutral-white-200: #f1f4f9;
+  --neutral-white-100: #fafbff;
+
+  --semantic-green-900: #036b30;
+  --semantic-green-800: #2a7841;
+  --semantic-green-700: #428553;
+  --semantic-green-600: #589264;
+  --semantic-green-500: #6da076;
+  --semantic-green-400: #81ad89;
+  --semantic-green-300: #96ba9c;
+  --semantic-green-200: #bfd6c2;
+  --semantic-green-100: #d4e3d6;
+
+  --semantic-red-900: #b81616;
+  --semantic-red-800: #c23729;
+  --semantic-red-700: #cc4f3c;
+  --semantic-red-600: #d46450;
+  --semantic-red-500: #dd7864;
+  --semantic-red-400: #e48b78;
+  --semantic-red-300: #eb9f8e;
+  --semantic-red-200: #f5c5ba;
+  --semantic-red-100: #fad8d0;
+
+  --semantic-yellow-900: #e4a704;
+  --semantic-yellow-800: #e8af2f;
+  --semantic-yellow-700: #edb648;
+  --semantic-yellow-600: #f0be5e;
+  --semantic-yellow-500: #f4c673;
+  --semantic-yellow-400: #f7ce87;
+  --semantic-yellow-300: #f9d69b;
+  --semantic-yellow-200: #fcdeaf;
+  --semantic-yellow-100: #feeed7;
+}

@@ -1,0 +1,59 @@
+.h1 {
+  font-size: 40px;
+  line-height: auto;
+  font-weight: semi-bold;
+}
+
+.h2 {
+  font-size: 32px;
+  line-height: auto;
+  font-weight: bold;
+}
+
+.h3 {
+  font-size: 24px;
+  line-height: auto;
+  font-weight: bold;
+}
+
+.h4 {
+  font-size: 18px;
+  line-height: auto;
+  font-weight: semi-bold;
+}
+
+.h5 {
+  font-size: 16px;
+  line-height: auto;
+  font-weight: medium;
+}
+
+.h6 {
+  font-size: 14px;
+  line-height: auto;
+  font-weight: medium;
+}
+
+.text-regular {
+  font-size: 14px;
+  line-height: 175%;
+  font-weight: regular;
+}
+
+.text-medium {
+  font-size: 14px;
+  line-height: 175%;
+  font-weight: medium;
+}
+
+.label-regular {
+  font-size: 12px;
+  line-height: auto;
+  font-weight: regular;
+}
+
+.label-medium {
+  font-size: 12px;
+  line-height: auto;
+  font-weight: medium;
+}
