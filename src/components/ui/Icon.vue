@@ -1,37 +1,12 @@
 <script setup>
 import { defineAsyncComponent } from "vue";
+import { iconValidator } from "@/helpers/validators";
 
 const props = defineProps({
   name: {
     type: String,
     required: true,
-    validator: value =>
-      [
-        "add",
-        "alert",
-        "bookmark",
-        "check",
-        "chevron-left",
-        "comment",
-        "email",
-        "google",
-        "grid",
-        "home",
-        "inbox",
-        "info",
-        "like",
-        "media",
-        "more",
-        "notification",
-        "paper",
-        "search",
-        "send",
-        "settings",
-        "upload",
-        "user",
-        "write",
-        "x"
-      ].includes(value)
+    validator: iconValidator
   }
 });
 

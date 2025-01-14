@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "auth": {
+      "username": "Username",
+      "password": "Password",
+      "login": "Log in",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+export const iconValidator = name =>
+  [
+    "add",
+    "alert",
+    "bookmark",
+    "check",
+    "chevron-left",
+    "comment",
+    "email",
+    "google",
+    "grid",
+    "home",
+    "inbox",
+    "info",
+    "like",
+    "media",
+    "more",
+    "notification",
+    "paper",
+    "search",
+    "send",
+    "settings",
+    "upload",
+    "user",
+    "write",
+    "x"
+  ].includes(name);
