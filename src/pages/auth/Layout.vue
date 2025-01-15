@@ -1,3 +1,24 @@
+<script setup lang="js">
+import { useUserStore } from "@/stores/user";
+import { watch } from "vue";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+const router = useRouter();
+
+watch(
+  () => userStore.isLoggedIn,
+  newVal => {
+    if (newVal) {
+      router.push({ name: "feed" });
+    }
+  },
+  {
+    immediate: true
+  }
+);
+</script>
+
 <template>
   <div class="container-wrapper">
     <div class="container">

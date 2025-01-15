@@ -1,9 +1,12 @@
 <script lang="js" setup>
+import { useUserStore } from "@/stores/user";
 import { useForm } from "vee-validate";
 import { useI18n } from "vue-i18n";
 import { object, ref, string } from "yup";
 
 const { t } = useI18n();
+
+const userStore = useUserStore();
 
 const MIN_USERNAME_LENGTH = 5;
 const MAX_USERNAME_LENGTH = 30;
@@ -92,7 +95,7 @@ const [firstName, firstNameAttrs] = defineField("firstName");
 const [lastName, lastNameAttrs] = defineField("lastName");
 
 const onSubmit = handleSubmit(values => {
-  alert(JSON.stringify(values, null, 2));
+  userStore.register(values);
 });
 </script>
 
