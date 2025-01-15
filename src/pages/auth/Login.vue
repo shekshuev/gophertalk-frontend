@@ -1,19 +1,22 @@
 <script lang="js" setup>
 import { useForm } from "vee-validate";
+import { useI18n } from "vue-i18n";
 import { object, string } from "yup";
+
+const { t } = useI18n();
 
 const { errors, handleSubmit, defineField } = useForm({
   initialValues: {
-    username: "",
+    userName: "",
     password: ""
   },
   validationSchema: object({
-    username: string().required("Username is required"),
-    password: string().required("Password is required")
+    userName: string().required(t("pages.auth.errors.userNameIsRequired")),
+    password: string().required(t("pages.auth.errors.passwordIsRequired"))
   })
 });
 
-const [username, usernameAttrs] = defineField("username");
+const [userName, userNameAttrs] = defineField("userName");
 const [password, passwordAttrs] = defineField("password");
 
 const onSubmit = handleSubmit(values => {
@@ -25,24 +28,24 @@ const onSubmit = handleSubmit(values => {
   <form class="card" @submit.prevent="onSubmit">
     <GTextInput
       class="mb-4"
-      :label="$t('pages.auth.username')"
-      v-model="username"
-      v-bind="usernameAttrs"
-      :error="errors.username"
+      :label="t('pages.auth.userName')"
+      v-model="userName"
+      v-bind="userNameAttrs"
+      :error="errors.userName"
     />
     <GTextInput
       class="mb-9"
       type="password"
-      :label="$t('pages.auth.password')"
+      :label="t('pages.auth.password')"
       v-model="password"
       v-bind="passwordAttrs"
       :error="errors.password"
     />
-    <GButton type="submit" :disabled="true">{{ $t("pages.auth.login") }}</GButton>
+    <GButton type="submit">{{ t("pages.auth.login") }}</GButton>
     <div class="no-account text-regular mt-7">
-      {{ $t("pages.auth.noAccount") }}
+      {{ t("pages.auth.noAccount") }}
       <router-link :to="{ name: 'register' }" class="text-medium">{{
-        $t("pages.auth.signUp")
+        t("pages.auth.signUp")
       }}</router-link>
     </div>
   </form>

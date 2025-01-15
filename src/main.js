@@ -10,6 +10,7 @@ import App from "./App.vue";
 import router from "./router";
 
 const i18n = createI18n({
+  legacy: false,
   locale: "en",
   fallbackLocale: "en",
   messages: {

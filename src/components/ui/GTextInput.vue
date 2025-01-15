@@ -83,11 +83,11 @@ defineProps({
 }
 
 .g-text-input__input_error {
-  outline: 1px solid var(--semantic-red-900);
+  outline: 2px solid var(--semantic-red-900);
 }
 
 .g-text-input__input:focus {
-  outline: 1px solid var(--neutral-black-400);
+  outline: 2px solid var(--neutral-black-400);
 }
 
 .g-text-input__error {

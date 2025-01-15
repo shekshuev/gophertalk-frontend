@@ -1,20 +1,22 @@
 <template>
-  <div class="container">
-    <div class="router-view-wrapper">
-      <div class="logo-wrapper">
-        <Logo :width="48" :height="48" />
-        <h4 class="h4">Gopher Talk</h4>
+  <div class="container-wrapper">
+    <div class="container">
+      <div class="router-view-wrapper">
+        <div class="logo-wrapper">
+          <Logo :width="48" :height="48" />
+          <h4 class="h4">Gopher Talk</h4>
+        </div>
+        <router-view></router-view>
       </div>
-      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <style scoped>
-.container {
+.container-wrapper {
   height: 100dvh;
   max-height: 100dvh;
-  overflow: hidden;
+  overflow: auto;
 }
 .router-view-wrapper {
   grid-column: 5 / span 4;
