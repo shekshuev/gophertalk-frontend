@@ -3,13 +3,15 @@ defineProps({
   variant: {
     type: String,
     default: "primary",
-    validator: value => ["primary", "secondary", "rounded"].includes(value)
+    validator: value => ["primary", "secondary", "rounded", "link"].includes(value)
   },
   disabled: {
     type: Boolean,
     default: false
   }
 });
+
+defineEmits("click");
 </script>
 
 <template>
@@ -19,8 +21,10 @@ defineProps({
       'g-button_primary': variant === 'primary',
       'g-button_secondary': variant === 'secondary',
       'g-button_rounded': variant === 'rounded',
+      'g-button_link': variant === 'link',
       disabled: disabled
     }"
+    @click="$emit('click')"
     v-bind="$attrs"
     :disabled="disabled"
   >
@@ -110,5 +114,26 @@ defineProps({
 .g-button_rounded.disabled:active {
   cursor: not-allowed;
   background: var(--primary-600);
+}
+
+.g-button_link {
+  border: none;
+  background: none;
+  color: var(--neutral-black-900);
+}
+
+.g-button_link:hover {
+  text-decoration: underline;
+}
+
+.g-button_link:active {
+  text-decoration: underline;
+}
+
+.g-button_link.disabled,
+.g-button_link.disabled:hover,
+.g-button_link.disabled:active {
+  cursor: not-allowed;
+  color: var(--neutral-black-600);
 }
 </style>

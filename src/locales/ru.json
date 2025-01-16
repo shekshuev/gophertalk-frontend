@@ -22,6 +22,12 @@
         "passwordMustMatch": "Пароли не совпадают",
         "onlyUnicode": "Используйте только символы Unicode"
       }
+    },
+    "main": {
+      "header": {
+        "search": "Поиск",
+        "logout": "Выйти"
+      }
     }
   }
 }

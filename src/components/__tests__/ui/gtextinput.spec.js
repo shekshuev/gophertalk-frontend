@@ -22,6 +22,26 @@ describe("GTextInput", () => {
     expect(label.props("label")).toBe("Test Label");
   });
 
+  it("renders without label", () => {
+    const wrapper = mount(GTextInput, {
+      props: {
+        label: "Test Label",
+        modelValue: "",
+        withLabel: false
+      },
+      global: {
+        components: {
+          GLabel
+        }
+      }
+    });
+
+    const label = wrapper.findComponent({ name: "GLabel" });
+    expect(label.exists()).toBe(false);
+    const input = wrapper.find("input");
+    expect(input.attributes("placeholder")).toBe("Test Label");
+  });
+
   it("renders the input with correct type and value", () => {
     const wrapper = mount(GTextInput, {
       props: {

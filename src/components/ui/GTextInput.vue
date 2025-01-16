@@ -36,13 +36,17 @@ defineProps({
   modelValue: {
     type: String,
     required: true
+  },
+  withLabel: {
+    type: Boolean,
+    default: true
   }
 });
 </script>
 
 <template>
   <div class="g-text-input__wrapper" :class="class">
-    <GLabel :for="id" :label="label" />
+    <GLabel v-if="withLabel" :for="id" :label="label" />
     <div class="g-text-input">
       <input
         class="g-text-input__input"

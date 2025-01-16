@@ -36,6 +36,17 @@ describe("YourComponent", () => {
     expect(button.classes()).toContain("g-button_rounded");
   });
 
+  it("renders the button with the link variant class", () => {
+    const wrapper = mount(GButton, {
+      props: {
+        variant: "link"
+      }
+    });
+
+    const button = wrapper.find("button");
+    expect(button.classes()).toContain("g-button_link");
+  });
+
   it("applies the disabled state correctly", () => {
     const wrapper = mount(GButton, {
       props: {

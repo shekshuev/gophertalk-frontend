@@ -22,6 +22,12 @@
         "passwordMustMatch": "Password must match",
         "onlyUnicode": "Use only Unicode characters"
       }
+    },
+    "main": {
+      "header": {
+        "search": "Search",
+        "logout": "Logout"
+      }
     }
   }
 }

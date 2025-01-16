@@ -18,5 +18,9 @@ export const useUserStore = defineStore("user", () => {
     });
   }
 
-  return { isLoggedIn, register, login };
+  function logout() {
+    accessToken.value = null;
+  }
+
+  return { isLoggedIn, register, login, logout };
 });
