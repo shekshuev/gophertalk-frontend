@@ -8,8 +8,16 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "feed",
-      component: () => import("@/pages/Feed.vue")
+      name: "main",
+      component: () => import("@/pages/main/Layout.vue"),
+      redirect: { name: "feed" },
+      children: [
+        {
+          path: "feed",
+          name: "feed",
+          component: () => import("@/pages/main/Feed.vue")
+        }
+      ]
     },
     {
       path: "/auth",
