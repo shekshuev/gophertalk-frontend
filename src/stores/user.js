@@ -1,4 +1,5 @@
-import { getUserById, performLogin, performRegister } from "@/services/auth";
+import { performLogin, performRegister } from "@/services/auth";
+import { getUserById } from "@/services/user";
 import { jwtDecode } from "jwt-decode";
 import { defineStore } from "pinia";
 import { computed, ref, watch } from "vue";
