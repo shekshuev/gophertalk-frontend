@@ -9,6 +9,12 @@ vi.mock("@/services/auth", () => ({
   performRegister: vi.fn()
 }));
 
+vi.mock("jwt-decode", () => ({
+  jwtDecode: () => {
+    sub: "123";
+  }
+}));
+
 describe("useUserStore", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
