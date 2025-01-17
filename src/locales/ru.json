@@ -27,6 +27,11 @@
       "header": {
         "search": "Поиск",
         "logout": "Выйти"
+      },
+      "sidebar": {
+        "home": "Главная",
+        "profile": "Профиль",
+        "settings": "Сообщения"
       }
     }
   }

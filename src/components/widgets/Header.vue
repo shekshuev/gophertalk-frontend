@@ -28,7 +28,7 @@ watch(
   <div class="header">
     <div class="container">
       <router-link :to="{ name: 'feed' }" class="logo-wrapper">
-        <Logo height="40" width="40" />
+        <Logo :height="40" :width="40" />
         <h4 class="h4">Gopher Talk</h4>
       </router-link>
       <div class="search-wrapper">

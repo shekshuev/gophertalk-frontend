@@ -11,7 +11,7 @@ defineProps({
   }
 });
 
-defineEmits("click");
+defineEmits(["click"]);
 </script>
 
 <template>

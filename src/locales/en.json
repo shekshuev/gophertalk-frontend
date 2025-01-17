@@ -27,6 +27,11 @@
       "header": {
         "search": "Search",
         "logout": "Logout"
+      },
+      "sidebar": {
+        "home": "Home",
+        "profile": "Profile",
+        "settings": "Messages"
       }
     }
   }

@@ -16,13 +16,18 @@ const router = createRouter({
           path: "feed",
           name: "feed",
           component: () => import("@/pages/main/Feed.vue")
+        },
+        {
+          path: "profile/:id",
+          name: "profile",
+          component: () => import("@/pages/main/Profile.vue")
         }
       ]
     },
     {
       path: "/auth",
       name: "auth",
-      redirect: "auth/login",
+      redirect: "/auth/login",
       component: AuthLayout,
       children: [
         {
