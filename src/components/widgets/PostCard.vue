@@ -1,6 +1,6 @@
 <script setup lang="js">
 import { shortenNumber } from "@/helpers/transformers";
-import { computed, onMounted, watch } from "vue";
+import { computed, inject, onMounted, watch } from "vue";
 
 const { post } = defineProps({
   post: {
@@ -10,6 +10,9 @@ const { post } = defineProps({
 });
 
 const emit = defineEmits(["like", "dislike", "view"]);
+
+const dayjs = inject("dayjs");
+const timeSinceCreated = dayjs(post.created_at).fromNow();
 
 const initials = computed(() => {
   if (post?.user) {
@@ -47,11 +50,14 @@ onMounted(() => {
   <div class="post-card">
     <div class="post-card__header">
       <div class="post-card__avatar h4">{{ initials }}</div>
-      <div>
-        <p class="text-medium">
-          {{ post.user ? post.user.first_name + " " + post.user.last_name : "" }}
-        </p>
-        <p class="label-regular">{{ post.user ? post.user.user_name : "" }}</p>
+      <div class="post-card__header-content">
+        <div>
+          <p class="text-medium">
+            {{ post.user ? post.user.first_name + " " + post.user.last_name : "" }}
+          </p>
+          <p class="label-regular">{{ post.user ? post.user.user_name : "" }}</p>
+        </div>
+        <p class="label-regular post-card__date">{{ timeSinceCreated }}</p>
       </div>
     </div>
     <div class="post-card__body text-regular">{{ post.text }}</div>
@@ -95,6 +101,16 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   background: var(--neutral-white-100);
+}
+
+.post-card__header-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.post-card__date {
+  color: var(--neutral-black-500);
 }
 
 .post-card__body {
