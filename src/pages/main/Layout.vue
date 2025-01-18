@@ -8,14 +8,14 @@ import Sidebar from "@/components/widgets/Sidebar.vue";
     <Header />
   </div>
 
-  <div class="container">
+  <main class="container">
     <div class="sidebar-wrapper">
       <Sidebar />
     </div>
     <div class="router-view__wrapper">
       <router-view></router-view>
     </div>
-  </div>
+  </main>
 </template>
 
 <style lang="css" scoped>
@@ -24,7 +24,7 @@ import Sidebar from "@/components/widgets/Sidebar.vue";
   background: var(--neutral-white-900);
   height: 80px;
 }
-.container {
+main.container {
   padding: 40px 0;
 }
 
