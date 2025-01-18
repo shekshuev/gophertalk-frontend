@@ -23,3 +23,26 @@ export async function getAllPosts({ limit, offset, replyToId, search }, accessTo
     throw new Error(response.error);
   }
 }
+
+export function viewPost(id, accessToken) {
+  performPostAction(id, "POST", "view", accessToken);
+}
+
+export function likePost(id, accessToken) {
+  performPostAction(id, "POST", "like", accessToken);
+}
+
+export function dislikePost(id, accessToken) {
+  performPostAction(id, "DELETE", "like", accessToken);
+}
+
+function performPostAction(id, method, action, accessToken) {
+  fetch(`${import.meta.env.VITE_APP_API_URL}/posts/${id}/${action}`, {
+    method,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+}

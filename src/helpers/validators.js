@@ -23,5 +23,6 @@ export const iconValidator = name =>
     "upload",
     "user",
     "write",
-    "x"
+    "x",
+    "eye"
   ].includes(name);

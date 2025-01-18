@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/services/post";
+import { dislikePost, getAllPosts, likePost, viewPost } from "@/services/post";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useUserStore } from "./user";
@@ -22,12 +22,24 @@ export const usePostStore = defineStore("post", () => {
         if (result.length === 0) {
           canLoadPosts.value = false;
         } else {
-          posts.value = [...posts.value, ...result];
+          posts.value.push(...result);
           params.value.offset += params.value.limit;
         }
       });
     }
   }
 
-  return { posts, canLoadPosts, loadPosts };
+  function like(id) {
+    likePost(id, userStore.accessToken);
+  }
+
+  function dislike(id) {
+    dislikePost(id, userStore.accessToken);
+  }
+
+  function view(id) {
+    viewPost(id, userStore.accessToken);
+  }
+
+  return { posts, canLoadPosts, loadPosts, like, dislike, view };
 });
