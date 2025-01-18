@@ -25,40 +25,32 @@ watch(
 </script>
 
 <template>
-  <div class="header">
-    <div class="container">
-      <router-link :to="{ name: 'feed' }" class="logo-wrapper">
-        <Logo :height="40" :width="40" />
-        <h4 class="h4">Gopher Talk</h4>
-      </router-link>
-      <div class="search-wrapper">
-        <GTextInput
-          class="search"
-          type="text"
-          :with-label="false"
-          :label="t('pages.main.header.search')"
-          v-model="search"
-        />
-      </div>
-      <div class="logout-wrapper">
-        <GButton variant="link" @click="userStore.logout">
-          <div class="logout-button__content">
-            {{ t("pages.main.header.logout") }}
-            <GIcon name="user" />
-          </div>
-        </GButton>
-      </div>
+  <div class="container">
+    <router-link :to="{ name: 'feed' }" class="logo-wrapper">
+      <Logo :height="40" :width="40" />
+      <h4 class="h4">Gopher Talk</h4>
+    </router-link>
+    <div class="search-wrapper">
+      <GTextInput
+        class="search"
+        type="text"
+        :with-label="false"
+        :label="t('pages.main.header.search')"
+        v-model="search"
+      />
+    </div>
+    <div class="logout-wrapper">
+      <GButton variant="link" @click="userStore.logout">
+        <div class="logout-button__content">
+          {{ t("pages.main.header.logout") }}
+          <GIcon name="user" />
+        </div>
+      </GButton>
     </div>
   </div>
 </template>
 
 <style scoped>
-.header {
-  border-bottom: 1px solid var(--neutral-white-300);
-  background: var(--neutral-white-900);
-  height: 80px;
-}
-
 .container {
   align-items: center;
   height: 100%;
