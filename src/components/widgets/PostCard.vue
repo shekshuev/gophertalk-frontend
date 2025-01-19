@@ -58,7 +58,9 @@ watch(showReplies, newVal => {
 });
 
 onMounted(() => {
-  emit("view", post.id);
+  if (!post.user_viewed) {
+    emit("view", post.id);
+  }
 });
 </script>
 
