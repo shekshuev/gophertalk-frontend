@@ -47,7 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="post-card">
+  <div class="post-card" :class="{ 'post-card_reply': post.reply_to_id > 0 }">
     <div class="post-card__header">
       <div class="post-card__avatar h4">{{ initials }}</div>
       <div class="post-card__header-content">
@@ -62,6 +62,9 @@ onMounted(() => {
     </div>
     <div class="post-card__body text-regular">{{ post.text }}</div>
     <div class="post-card__footer">
+      <router-link :to="{ name: 'post', params: { id: post.id } }" class="post-card__replies">
+        <GIcon name="comment" />
+      </router-link>
       <span class="post-card__views"><GIcon name="eye" />{{ views }}</span>
       <span
         class="post-card__likes"
@@ -80,6 +83,10 @@ onMounted(() => {
   border: 1px solid var(--neutral-white-300);
   background: var(--neutral-white-900);
   display: grid;
+}
+
+.post-card_reply {
+  background: var(--neutral-white-200);
 }
 
 .post-card__header {
@@ -126,15 +133,18 @@ onMounted(() => {
 }
 
 .post-card__likes,
-.post-card__views {
+.post-card__views,
+.post-card__replies {
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--neutral-black-500);
   transition: color 0.2s ease;
+  text-decoration: none;
 }
 
-.post-card__likes {
+.post-card__likes,
+.post-card__replies {
   cursor: pointer;
 }
 
@@ -148,7 +158,9 @@ onMounted(() => {
 }
 
 .post-card__likes:hover,
-.post-card__likes:active {
+.post-card__likes:active,
+.post-card__replies:hover,
+.post-card__replies:active {
   color: var(--neutral-black-700);
 }
 </style>

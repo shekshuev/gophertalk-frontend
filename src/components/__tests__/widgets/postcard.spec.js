@@ -75,6 +75,14 @@ describe("PostCard Component", () => {
     expect(views.text()).toContain("200");
   });
 
+  it("renders as reply post card correctly", () => {
+    const wrapper = mount(PostCard, {
+      props: { post: { ...post, reply_to_id: 1 } }
+    });
+
+    expect(wrapper.classes()).toContain("post-card_reply");
+  });
+
   it("emits like and dislike events correctly", async () => {
     const wrapper = mount(PostCard, {
       props: { post }
