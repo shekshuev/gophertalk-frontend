@@ -123,4 +123,97 @@ describe("PostCard Component", () => {
 
     expect(wrapper.emitted("view")).toBeTruthy();
   });
+
+  it("toggles showReplies correctly and emits 'load-replies' event", async () => {
+    const wrapper = mount(PostCard, {
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
+    });
+
+    const repliesToggle = wrapper.find(".post-card__replies");
+
+    await repliesToggle.trigger("click");
+    expect(wrapper.vm.showReplies).toBe(true);
+    expect(wrapper.emitted("load-replies")).toBeTruthy();
+    expect(wrapper.emitted("load-replies")[0]).toEqual([post.id]);
+  });
+
+  it("handles like button state changes correctly", async () => {
+    const wrapper = mount(PostCard, {
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
+    });
+
+    const likeButton = wrapper.find(".post-card__likes");
+
+    await likeButton.trigger("click");
+    expect(post.user_liked).toBe(true);
+    expect(post.likes_count).toBe(11);
+    expect(wrapper.emitted("like")).toBeTruthy();
+
+    await likeButton.trigger("click");
+    expect(post.user_liked).toBe(false);
+    expect(post.likes_count).toBe(10);
+    expect(wrapper.emitted("dislike")).toBeTruthy();
+  });
+
+  it("renders nested replies correctly", async () => {
+    const postWithReplies = {
+      ...post,
+      replies: [
+        {
+          id: 1,
+          user: {
+            first_name: "Alice",
+            last_name: "Smith",
+            user_name: "alice_smith"
+          },
+          text: "This is a reply.",
+          created_at: "2025-01-14T13:00:00Z",
+          likes_count: 5,
+          views_count: 50,
+          user_liked: false
+        }
+      ]
+    };
+
+    const wrapper = mount(PostCard, {
+      props: { post: postWithReplies },
+      global: {
+        plugins: [i18n]
+      }
+    });
+
+    const replyButton = wrapper.find(".post-card__replies");
+    await replyButton.trigger("click");
+
+    const reply = wrapper.findAllComponents(PostCard)[0];
+    expect(reply.exists()).toBe(true);
+    expect(reply.props("post")).toEqual(postWithReplies.replies[0]);
+  });
+
+  it("emits 'view' event only if user has not viewed the post", () => {
+    const wrapper = mount(PostCard, {
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
+    });
+
+    expect(wrapper.emitted("view")).toBeTruthy();
+
+    const alreadyViewedPost = { ...post, user_viewed: true };
+    const newWrapper = mount(PostCard, {
+      props: { post: alreadyViewedPost },
+      global: {
+        plugins: [i18n]
+      }
+    });
+
+    expect(newWrapper.emitted("view")).toBeFalsy();
+  });
 });
