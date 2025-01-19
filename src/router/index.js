@@ -18,14 +18,9 @@ const router = createRouter({
           component: () => import("@/pages/main/Feed.vue")
         },
         {
-          path: "profile/:id",
+          path: "profile/:id(\\d+)",
           name: "profile",
           component: () => import("@/pages/main/Profile.vue")
-        },
-        {
-          path: "post/:id",
-          name: "post",
-          component: () => import("@/pages/main/Post.vue")
         }
       ]
     },

@@ -21,9 +21,10 @@ useInfiniteScroll(postsEl, postStore.loadPosts, {
       v-for="post in posts"
       :key="post.id"
       :post="post"
-      @like="postStore.like(post.id)"
-      @dislike="postStore.dislike(post.id)"
-      @view="postStore.view(post.id)"
+      @like="postStore.like($event)"
+      @dislike="postStore.dislike($event)"
+      @view="postStore.view($event)"
+      @load-replies="postStore.loadReplies($event)"
     />
   </div>
 </template>

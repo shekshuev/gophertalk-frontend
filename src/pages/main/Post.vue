@@ -1,1 +1,0 @@
-<template>post page</template>

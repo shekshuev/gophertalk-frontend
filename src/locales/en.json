@@ -34,5 +34,10 @@
         "settings": "Messages"
       }
     }
+  },
+  "widgets": {
+    "postCard": {
+      "reply": "Reply"
+    }
   }
 }

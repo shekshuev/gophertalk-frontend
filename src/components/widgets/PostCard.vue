@@ -1,6 +1,8 @@
 <script setup lang="js">
 import { shortenNumber } from "@/helpers/transformers";
-import { computed, inject, onMounted, watch } from "vue";
+import { useInfiniteScroll } from "@vueuse/core";
+import { computed, inject, onMounted, ref, useTemplateRef, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
 const { post } = defineProps({
   post: {
@@ -9,7 +11,9 @@ const { post } = defineProps({
   }
 });
 
-const emit = defineEmits(["like", "dislike", "view"]);
+const { t } = useI18n();
+
+const emit = defineEmits(["like", "dislike", "view", "load-replies"]);
 
 const dayjs = inject("dayjs");
 const timeSinceCreated = dayjs(post.created_at).fromNow();
@@ -25,29 +29,41 @@ const initials = computed(() => {
 const likes = computed(() => shortenNumber(post.likes_count));
 const views = computed(() => shortenNumber(post.views_count));
 
+const showReplies = ref(false);
+
 function switchLike() {
   post.user_liked = !post.user_liked;
   post.likes_count += post.user_liked ? 1 : -1;
 }
+const postsEl = useTemplateRef("replies", post.id);
 
 watch(
   () => post.likes_count,
   (newVal, oldVal) => {
     if (newVal > oldVal) {
-      emit("like");
+      emit("like", post.id);
     } else if (newVal < oldVal) {
-      emit("dislike");
+      emit("dislike", post.id);
     }
   }
 );
 
+watch(showReplies, newVal => {
+  if (newVal) {
+    emit("load-replies", post.id);
+    useInfiniteScroll(postsEl, () => emit("load-replies", post.id), {
+      canLoadMore: () => post.canLoadPosts
+    });
+  }
+});
+
 onMounted(() => {
-  emit("view");
+  emit("view", post.id);
 });
 </script>
 
 <template>
-  <div class="post-card" :class="{ 'post-card_reply': post.reply_to_id > 0 }">
+  <div class="post-card">
     <div class="post-card__header">
       <div class="post-card__avatar h4">{{ initials }}</div>
       <div class="post-card__header-content">
@@ -62,9 +78,9 @@ onMounted(() => {
     </div>
     <div class="post-card__body text-regular">{{ post.text }}</div>
     <div class="post-card__footer">
-      <router-link :to="{ name: 'post', params: { id: post.id } }" class="post-card__replies">
+      <span @click="showReplies = true" class="post-card__replies">
         <GIcon name="comment" />
-      </router-link>
+      </span>
       <span class="post-card__views"><GIcon name="eye" />{{ views }}</span>
       <span
         class="post-card__likes"
@@ -73,6 +89,24 @@ onMounted(() => {
       >
         <GIcon name="like" />{{ likes }}
       </span>
+    </div>
+    <div v-if="showReplies" class="post-card__replies-wrapper" ref="replies">
+      <GTextInput
+        class="mt-1"
+        type="text"
+        :with-label="false"
+        :label="t('widgets.postCard.reply')"
+      />
+      <template v-if="Array.isArray(post.replies)">
+        <PostCard
+          v-for="reply in post.replies"
+          :key="reply.id"
+          :post="reply"
+          @like="$emit('like', reply.id)"
+          @dislike="$emit('dislike', reply.id)"
+          @view="$emit('view', reply.id)"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -83,10 +117,6 @@ onMounted(() => {
   border: 1px solid var(--neutral-white-300);
   background: var(--neutral-white-900);
   display: grid;
-}
-
-.post-card_reply {
-  background: var(--neutral-white-200);
 }
 
 .post-card__header {
@@ -162,5 +192,15 @@ onMounted(() => {
 .post-card__replies:hover,
 .post-card__replies:active {
   color: var(--neutral-black-700);
+}
+
+.post-card__replies-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  display: grid;
+  gap: 32px;
+  padding: 0 32px 32px 32px;
+  max-height: 350px;
 }
 </style>

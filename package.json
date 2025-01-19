@@ -16,6 +16,7 @@
     "@vueuse/core": "^12.4.0",
     "dayjs": "^1.11.13",
     "jwt-decode": "^4.0.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.3.0",
     "vee-validate": "^4.15.0",
     "vite-svg-loader": "^5.1.0",
