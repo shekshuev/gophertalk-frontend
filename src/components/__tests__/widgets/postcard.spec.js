@@ -1,7 +1,16 @@
 import PostCard from "@/components/widgets/PostCard.vue";
+import en from "@/locales/en.json";
 import { mount } from "@vue/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { inject } from "vue";
+import { createI18n } from "vue-i18n";
+
+const i18n = createI18n({
+  locale: "en",
+  messages: {
+    en
+  }
+});
 
 vi.mock("vue", async importOriginal => {
   const actual = await importOriginal();
@@ -38,7 +47,10 @@ describe("PostCard Component", () => {
 
   it("renders user initials correctly", () => {
     const wrapper = mount(PostCard, {
-      props: { post }
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
     });
 
     const avatar = wrapper.find(".post-card__avatar");
@@ -47,7 +59,10 @@ describe("PostCard Component", () => {
 
   it("renders post text correctly", () => {
     const wrapper = mount(PostCard, {
-      props: { post }
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
     });
 
     const body = wrapper.find(".post-card__body");
@@ -56,7 +71,10 @@ describe("PostCard Component", () => {
 
   it("renders time since post creation", () => {
     const wrapper = mount(PostCard, {
-      props: { post }
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
     });
 
     const date = wrapper.find(".post-card__date");
@@ -65,7 +83,10 @@ describe("PostCard Component", () => {
 
   it("renders likes and views count correctly", () => {
     const wrapper = mount(PostCard, {
-      props: { post }
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
     });
 
     const likes = wrapper.find(".post-card__likes");
@@ -77,7 +98,10 @@ describe("PostCard Component", () => {
 
   it("emits like and dislike events correctly", async () => {
     const wrapper = mount(PostCard, {
-      props: { post }
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
     });
 
     const likes = wrapper.find(".post-card__likes");
@@ -91,7 +115,10 @@ describe("PostCard Component", () => {
 
   it("emits view event on mount", () => {
     const wrapper = mount(PostCard, {
-      props: { post }
+      props: { post },
+      global: {
+        plugins: [i18n]
+      }
     });
 
     expect(wrapper.emitted("view")).toBeTruthy();
