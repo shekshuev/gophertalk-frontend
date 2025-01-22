@@ -32,7 +32,7 @@ const onSubmit = handleSubmit(values => {
   <form class="post-form" @submit.prevent="onSubmit">
     <div class="post-form__body">
       <div class="post-form__avatar">{{ userStore.initials }}</div>
-      <GTextInput
+      <GTextArea
         :with-label="false"
         :label="t('widgets.postForm.text')"
         v-model="text"
