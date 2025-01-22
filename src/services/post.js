@@ -63,3 +63,21 @@ function performPostAction(id, method, action, accessToken) {
     }
   });
 }
+
+export async function makePost({ text, replyToId }, accessToken) {
+  const rawResponse = await fetch(`${import.meta.env.VITE_APP_API_URL}/posts`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    },
+    body: JSON.stringify({ text, reply_to_id: replyToId })
+  });
+  const response = await rawResponse.json();
+  if (rawResponse.ok) {
+    return response;
+  } else {
+    throw new Error(response.error);
+  }
+}

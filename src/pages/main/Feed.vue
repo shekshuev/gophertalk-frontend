@@ -1,5 +1,6 @@
 <script setup lang="js">
 import PostCard from "@/components/widgets/PostCard.vue";
+import PostForm from "@/components/widgets/PostForm.vue";
 import { usePostStore } from "@/stores/post";
 import { useInfiniteScroll } from "@vueuse/core";
 import { computed, useTemplateRef } from "vue";
@@ -17,6 +18,7 @@ useInfiniteScroll(postsEl, postStore.loadPosts, {
 
 <template>
   <div class="posts" ref="posts">
+    <PostForm />
     <PostCard
       v-for="post in posts"
       :key="post.id"

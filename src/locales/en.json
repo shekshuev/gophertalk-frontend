@@ -38,6 +38,13 @@
   "widgets": {
     "postCard": {
       "reply": "Reply"
+    },
+    "postForm": {
+      "text": "What's on your mind?",
+      "replyText": "Write your reply",
+      "required": "Should not be empty",
+      "maxLength": "Text must contain maximum 280 characters",
+      "submit": "Post"
     }
   }
 }

@@ -15,7 +15,16 @@ export const useUserStore = defineStore("user", () => {
       return null;
     }
   });
+
   const id = computed(() => tokenPayload.value?.sub);
+
+  const initials = computed(() => {
+    if (me.value) {
+      return me.value.first_name[0].toUpperCase() + me.value.last_name[0].toUpperCase();
+    } else {
+      return "";
+    }
+  });
 
   function register(payload) {
     performRegister(payload).then(result => {
@@ -41,5 +50,5 @@ export const useUserStore = defineStore("user", () => {
     }
   });
 
-  return { isLoggedIn, register, login, logout, me, accessToken };
+  return { isLoggedIn, register, login, logout, me, accessToken, initials };
 });

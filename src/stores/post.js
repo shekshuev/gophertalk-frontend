@@ -1,4 +1,4 @@
-import { dislikePost, getAllPosts, likePost, viewPost } from "@/services/post";
+import { dislikePost, getAllPosts, likePost, makePost, viewPost } from "@/services/post";
 import { debounce } from "lodash";
 import { defineStore } from "pinia";
 import { ref } from "vue";
@@ -67,6 +67,23 @@ export const usePostStore = defineStore("post", () => {
     viewPost(id, userStore.accessToken);
   }
 
+  async function post(params) {
+    try {
+      const response = await makePost(params, userStore.accessToken);
+      posts.value.unshift({
+        ...response,
+        user: {
+          id: userStore.me.id,
+          first_name: userStore.me.first_name,
+          last_name: userStore.me.last_name,
+          user_name: userStore.me.user_name
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return {
     posts,
     canLoadPosts,
@@ -74,6 +91,7 @@ export const usePostStore = defineStore("post", () => {
     like,
     dislike,
     view,
-    loadReplies
+    loadReplies,
+    post
   };
 });

@@ -8,14 +8,6 @@ const userStore = useUserStore();
 const { t } = useI18n();
 const route = useRoute();
 
-const initials = computed(() => {
-  if (userStore.me) {
-    return userStore.me.first_name[0].toUpperCase() + userStore.me.last_name[0].toUpperCase();
-  } else {
-    return "";
-  }
-});
-
 const menu = computed(() => [
   {
     id: 1,
@@ -35,7 +27,7 @@ const menu = computed(() => [
 <template>
   <div class="sidebar">
     <img src="@/assets/images/cover.jpeg" alt="cover" class="sidebar__cover" />
-    <div class="sidebar__avatar h4">{{ initials }}</div>
+    <div class="sidebar__avatar h4">{{ userStore.initials }}</div>
     <div class="sidebar__content">
       <div>
         <p class="text-medium">
