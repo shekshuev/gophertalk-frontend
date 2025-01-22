@@ -154,6 +154,7 @@ onMounted(() => {
 
 .post-card__body {
   padding: 24px 32px;
+  white-space: pre-line;
 }
 
 .post-card__footer {
