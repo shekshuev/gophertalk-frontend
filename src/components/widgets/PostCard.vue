@@ -3,6 +3,7 @@ import { shortenNumber } from "@/helpers/transformers";
 import { useInfiniteScroll } from "@vueuse/core";
 import { computed, inject, onMounted, ref, useTemplateRef, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import PostForm from "./PostForm.vue";
 
 const { post } = defineProps({
   post: {
@@ -93,12 +94,7 @@ onMounted(() => {
       </span>
     </div>
     <div v-if="showReplies" class="post-card__replies-wrapper" ref="replies">
-      <GTextInput
-        class="mt-1"
-        type="text"
-        :with-label="false"
-        :label="t('widgets.postCard.reply')"
-      />
+      <PostForm :reply-to-id="post.id" />
       <template v-if="Array.isArray(post.replies)">
         <PostCard
           v-for="reply in post.replies"

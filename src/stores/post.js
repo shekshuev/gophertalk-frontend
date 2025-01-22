@@ -70,15 +70,30 @@ export const usePostStore = defineStore("post", () => {
   async function post(params) {
     try {
       const response = await makePost(params, userStore.accessToken);
-      posts.value.unshift({
-        ...response,
-        user: {
-          id: userStore.me.id,
-          first_name: userStore.me.first_name,
-          last_name: userStore.me.last_name,
-          user_name: userStore.me.user_name
+      if (params.replyToId > 0) {
+        const post = posts.value.find(p => p.id === params.replyToId);
+        if (post) {
+          post.replies.unshift({
+            ...response,
+            user: {
+              id: userStore.me.id,
+              first_name: userStore.me.first_name,
+              last_name: userStore.me.last_name,
+              user_name: userStore.me.user_name
+            }
+          });
         }
-      });
+      } else {
+        posts.value.unshift({
+          ...response,
+          user: {
+            id: userStore.me.id,
+            first_name: userStore.me.first_name,
+            last_name: userStore.me.last_name,
+            user_name: userStore.me.user_name
+          }
+        });
+      }
     } catch (err) {
       console.error(err);
     }

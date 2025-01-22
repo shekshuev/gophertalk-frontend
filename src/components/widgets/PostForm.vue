@@ -2,13 +2,18 @@
 import { usePostStore } from "@/stores/post";
 import { useUserStore } from "@/stores/user";
 import { useForm } from "vee-validate";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { object, string } from "yup";
+
+const { replyToId } = defineProps(["replyToId"]);
 
 const { t } = useI18n();
 
 const userStore = useUserStore();
 const postStore = usePostStore();
+
+const nested = computed(() => replyToId > 0);
 
 const { errors, handleSubmit, defineField, resetForm } = useForm({
   initialValues: {
@@ -24,17 +29,17 @@ const { errors, handleSubmit, defineField, resetForm } = useForm({
 const [text, textAttrs] = defineField("text");
 
 const onSubmit = handleSubmit(values => {
-  postStore.post(values).then(() => resetForm());
+  postStore.post({ ...values, replyToId }).then(() => resetForm());
 });
 </script>
 
 <template>
-  <form class="post-form" @submit.prevent="onSubmit">
+  <form class="post-form" :class="{ 'post-form_nested': nested }" @submit.prevent="onSubmit">
     <div class="post-form__body">
       <div class="post-form__avatar">{{ userStore.initials }}</div>
       <GTextArea
         :with-label="false"
-        :label="t('widgets.postForm.text')"
+        :label="nested ? t('widgets.postForm.replyText') : t('widgets.postForm.text')"
         v-model="text"
         v-bind="textAttrs"
         :error="errors.text"
@@ -42,7 +47,7 @@ const onSubmit = handleSubmit(values => {
     </div>
     <div class="post-form__actions">
       <GButton type="submit" variant="rounded">
-        {{ t("widgets.postForm.submit") }}
+        {{ nested ? t("widgets.postForm.reply") : t("widgets.postForm.post") }}
       </GButton>
     </div>
   </form>
@@ -56,6 +61,12 @@ const onSubmit = handleSubmit(values => {
   display: grid;
   gap: 16px;
   padding: 24px 32px;
+}
+
+.post-form_nested {
+  padding: 0;
+  padding-top: 2px;
+  border: none;
 }
 
 .post-form__body {
