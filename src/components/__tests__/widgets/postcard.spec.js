@@ -1,5 +1,7 @@
 import PostCard from "@/components/widgets/PostCard.vue";
+import PostForm from "@/components/widgets/PostForm.vue";
 import en from "@/locales/en.json";
+import { createTestingPinia } from "@pinia/testing";
 import { mount } from "@vue/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { inject } from "vue";
@@ -47,10 +49,7 @@ describe("PostCard Component", () => {
 
   it("renders user initials correctly", () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     const avatar = wrapper.find(".post-card__avatar");
@@ -59,10 +58,7 @@ describe("PostCard Component", () => {
 
   it("renders post text correctly", () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     const body = wrapper.find(".post-card__body");
@@ -71,10 +67,7 @@ describe("PostCard Component", () => {
 
   it("renders time since post creation", () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     const date = wrapper.find(".post-card__date");
@@ -83,10 +76,7 @@ describe("PostCard Component", () => {
 
   it("renders likes and views count correctly", () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     const likes = wrapper.find(".post-card__likes");
@@ -98,10 +88,7 @@ describe("PostCard Component", () => {
 
   it("emits like and dislike events correctly", async () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     const likes = wrapper.find(".post-card__likes");
@@ -115,10 +102,7 @@ describe("PostCard Component", () => {
 
   it("emits view event on mount", () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     expect(wrapper.emitted("view")).toBeTruthy();
@@ -128,7 +112,15 @@ describe("PostCard Component", () => {
     const wrapper = mount(PostCard, {
       props: { post },
       global: {
-        plugins: [i18n]
+        components: {
+          PostForm
+        },
+        plugins: [
+          createTestingPinia({
+            createSpy: vi.fn
+          }),
+          i18n
+        ]
       }
     });
 
@@ -142,10 +134,7 @@ describe("PostCard Component", () => {
 
   it("handles like button state changes correctly", async () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     const likeButton = wrapper.find(".post-card__likes");
@@ -184,7 +173,12 @@ describe("PostCard Component", () => {
     const wrapper = mount(PostCard, {
       props: { post: postWithReplies },
       global: {
-        plugins: [i18n]
+        plugins: [
+          createTestingPinia({
+            createSpy: vi.fn
+          }),
+          i18n
+        ]
       }
     });
 
@@ -198,20 +192,14 @@ describe("PostCard Component", () => {
 
   it("emits 'view' event only if user has not viewed the post", () => {
     const wrapper = mount(PostCard, {
-      props: { post },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post }
     });
 
     expect(wrapper.emitted("view")).toBeTruthy();
 
     const alreadyViewedPost = { ...post, user_viewed: true };
     const newWrapper = mount(PostCard, {
-      props: { post: alreadyViewedPost },
-      global: {
-        plugins: [i18n]
-      }
+      props: { post: alreadyViewedPost }
     });
 
     expect(newWrapper.emitted("view")).toBeFalsy();

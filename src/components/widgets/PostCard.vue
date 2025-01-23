@@ -2,7 +2,6 @@
 import { shortenNumber } from "@/helpers/transformers";
 import { useInfiniteScroll } from "@vueuse/core";
 import { computed, inject, onMounted, ref, useTemplateRef, watch } from "vue";
-import { useI18n } from "vue-i18n";
 import PostForm from "./PostForm.vue";
 
 const { post } = defineProps({
@@ -11,8 +10,6 @@ const { post } = defineProps({
     required: true
   }
 });
-
-const { t } = useI18n();
 
 const emit = defineEmits(["like", "dislike", "view", "load-replies"]);
 
