@@ -34,7 +34,7 @@ main.container {
 
 .router-view__wrapper {
   grid-column: span 9;
-  max-height: calc(100vh - 80px - 40px);
-  height: calc(100vh - 80px - 40px);
+  max-height: calc(100vh - 80px - 80px);
+  height: calc(100vh - 80px - 80px);
 }
 </style>
