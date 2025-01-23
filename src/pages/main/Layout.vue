@@ -1,4 +1,5 @@
 <script setup lang="js">
+import BottomNavigation from "@/components/widgets/BottomNavigation.vue";
 import Header from "@/components/widgets/Header.vue";
 import Sidebar from "@/components/widgets/Sidebar.vue";
 </script>
@@ -16,6 +17,9 @@ import Sidebar from "@/components/widgets/Sidebar.vue";
       <router-view></router-view>
     </div>
   </main>
+  <div class="bottom-navigation__wrapper">
+    <BottomNavigation />
+  </div>
 </template>
 
 <style lang="css" scoped>
@@ -38,9 +42,27 @@ main.container {
   height: calc(100vh - 80px - 80px);
 }
 
+.bottom-navigation__wrapper {
+  height: 72px;
+  display: none;
+}
+
 @media screen and (max-width: 936px) {
   .sidebar-wrapper {
     display: none;
+  }
+  .bottom-navigation__wrapper {
+    display: block;
+  }
+
+  .router-view__wrapper {
+    grid-column: span 9;
+    max-height: calc(100vh - 80px - 20px - 72px);
+    height: calc(100vh - 80px - 20px - 72px);
+  }
+
+  main.container {
+    padding: 10px 0;
   }
 }
 </style>

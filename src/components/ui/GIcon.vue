@@ -1,6 +1,6 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
 import { iconValidator } from "@/helpers/validators";
+import { defineAsyncComponent } from "vue";
 
 const props = defineProps({
   name: {
@@ -14,5 +14,5 @@ const icon = defineAsyncComponent(() => import(`@/assets/icons/${props.name}.svg
 </script>
 
 <template>
-  <component :is="icon" class="fill-current" />
+  <component :is="icon" />
 </template>
