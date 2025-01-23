@@ -37,4 +37,10 @@ main.container {
   max-height: calc(100vh - 80px - 80px);
   height: calc(100vh - 80px - 80px);
 }
+
+@media screen and (max-width: 936px) {
+  .sidebar-wrapper {
+    display: none;
+  }
+}
 </style>

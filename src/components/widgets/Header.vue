@@ -97,4 +97,11 @@ watch(
   justify-content: flex-end;
   gap: 16px;
 }
+
+@media screen and (max-width: 936px) {
+  .search-wrapper,
+  .logout-wrapper {
+    display: none;
+  }
+}
 </style>
