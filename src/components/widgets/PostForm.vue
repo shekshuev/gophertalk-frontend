@@ -61,6 +61,7 @@ const onSubmit = handleSubmit(values => {
   display: grid;
   gap: 16px;
   padding: 24px 32px;
+  max-height: min-content;
 }
 
 .post-form_nested {

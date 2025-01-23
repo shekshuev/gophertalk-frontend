@@ -1,7 +1,7 @@
 import { dislikePost, getAllPosts, likePost, makePost, viewPost } from "@/services/post";
 import { debounce } from "lodash";
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useUserStore } from "./user";
 
 export const usePostStore = defineStore("post", () => {
@@ -13,18 +13,55 @@ export const usePostStore = defineStore("post", () => {
     search: undefined
   });
 
+  const needReset = ref(false);
+
   const posts = ref([]);
 
   const canLoadPosts = ref(true);
 
+  function setSearch(search) {
+    if (search) {
+      if (params.value.search) {
+        params.value.search = search;
+      } else {
+        params.value = {
+          limit: 10,
+          offset: 0,
+          replyToId: undefined,
+          search: search
+        };
+      }
+    } else {
+      params.value = {
+        limit: 10,
+        offset: 0,
+        replyToId: undefined,
+        search: undefined
+      };
+    }
+  }
+
+  watch(
+    () => params.value.search,
+    () => {
+      needReset.value = true;
+      loadPosts();
+    }
+  );
+
   function loadPosts() {
     if (canLoadPosts.value) {
       getAllPosts(params.value, userStore.accessToken).then(result => {
-        if (result.length === 0) {
-          canLoadPosts.value = false;
+        if (needReset.value) {
+          posts.value = result;
+          needReset.value = false;
         } else {
-          posts.value.push(...result);
-          params.value.offset += params.value.limit;
+          if (result.length === 0) {
+            canLoadPosts.value = false;
+          } else {
+            posts.value.push(...result);
+            params.value.offset += params.value.limit;
+          }
         }
       });
     }
@@ -107,6 +144,7 @@ export const usePostStore = defineStore("post", () => {
     dislike,
     view,
     loadReplies,
-    post
+    post,
+    setSearch
   };
 });

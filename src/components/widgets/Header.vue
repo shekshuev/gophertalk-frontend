@@ -1,5 +1,7 @@
 <script setup lang="js">
+import { usePostStore } from "@/stores/post";
 import { useUserStore } from "@/stores/user";
+import { debounce } from "lodash";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -7,9 +9,15 @@ import { useRouter } from "vue-router";
 const { t } = useI18n();
 
 const userStore = useUserStore();
+const postStore = usePostStore();
 const router = useRouter();
 
 const search = ref("");
+
+watch(
+  search,
+  debounce(newVal => postStore.setSearch(newVal), 500)
+);
 
 watch(
   () => userStore.isLoggedIn,

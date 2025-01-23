@@ -115,6 +115,7 @@ onMounted(() => {
   border: 1px solid var(--neutral-white-300);
   background: var(--neutral-white-900);
   display: grid;
+  max-height: max-content;
 }
 
 .post-card__header {

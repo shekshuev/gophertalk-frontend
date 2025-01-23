@@ -36,7 +36,8 @@ useInfiniteScroll(postsEl, postStore.loadPosts, {
   width: 100%;
   height: 100%;
   overflow: scroll;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
 }
 </style>
