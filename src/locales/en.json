@@ -46,6 +46,10 @@
       "maxLength": "Text must contain maximum 280 characters",
       "post": "Post",
       "reply": "Reply"
+    },
+    "profileHeader": {
+      "myPosts": "My posts",
+      "settings": "Settings"
     }
   }
 }

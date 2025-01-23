@@ -46,6 +46,10 @@
       "maxLength": "Текст должен содержать максимум 280 символов",
       "post": "Опубликовать",
       "reply": "Ответить"
+    },
+    "profileHeader": {
+      "myPosts": "My posts",
+      "settings": "Settings"
     }
   }
 }
