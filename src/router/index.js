@@ -20,18 +20,31 @@ const router = createRouter({
         {
           path: "profile/:id(\\d+)",
           name: "profile",
-          component: () => import("@/pages/main/Profile.vue"),
+          component: () => import("@/pages/main/profile/Layout.vue"),
           redirect: { name: "my-posts" },
           children: [
             {
               path: "posts",
               name: "my-posts",
-              component: () => import("@/pages/main/MyPosts.vue")
+              component: () => import("@/pages/main/profile/MyPosts.vue")
             },
             {
               path: "settings",
               name: "settings",
-              component: () => import("@/pages/main/Settings.vue")
+              component: () => import("@/pages/main/profile/settings/Layout.vue"),
+              redirect: { name: "general" },
+              children: [
+                {
+                  path: "general",
+                  name: "general",
+                  component: () => import("@/pages/main/profile/settings/General.vue")
+                },
+                {
+                  path: "account",
+                  name: "account",
+                  component: () => import("@/pages/main/profile/settings/Account.vue")
+                }
+              ]
             }
           ]
         }

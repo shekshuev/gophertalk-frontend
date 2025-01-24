@@ -23,11 +23,12 @@ const { t } = useI18n();
       <router-link
         class="profile-header__link"
         :to="{ name: 'my-posts', params: { id: userStore.me?.id || 0 } }"
-        >{{ t("widgets.profileHeader.myPosts") }}</router-link
       >
-      <router-link class="profile-header__link" :to="{ name: 'settings' }">{{
-        t("widgets.profileHeader.settings")
-      }}</router-link>
+        {{ t("widgets.profileHeader.myPosts") }}
+      </router-link>
+      <router-link class="profile-header__link" :to="{ name: 'settings' }">
+        {{ t("widgets.profileHeader.settings") }}
+      </router-link>
     </div>
   </div>
 </template>

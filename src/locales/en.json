@@ -33,6 +33,12 @@
         "profile": "Profile",
         "settings": "Messages"
       }
+    },
+    "settings": {
+      "header": "Settings",
+      "general": "General",
+      "account": "Account",
+      "logout": "Logout"
     }
   },
   "widgets": {

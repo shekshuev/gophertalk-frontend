@@ -33,6 +33,12 @@
         "profile": "Профиль",
         "settings": "Сообщения"
       }
+    },
+    "settings": {
+      "header": "Настройки",
+      "general": "Общие",
+      "account": "Аккаунт",
+      "logout": "Выйти"
     }
   },
   "widgets": {
@@ -48,8 +54,8 @@
       "reply": "Ответить"
     },
     "profileHeader": {
-      "myPosts": "My posts",
-      "settings": "Settings"
+      "myPosts": "Мои посты",
+      "settings": "Настройки"
     }
   }
 }
