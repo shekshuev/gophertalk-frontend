@@ -11,7 +11,10 @@ import ProfileHeader from "@/components/widgets/ProfileHeader.vue";
 
 <style lang="css" scoped>
 .profile__wrapper {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
+  overflow-y: auto;
+  height: 100%;
 }
 </style>
