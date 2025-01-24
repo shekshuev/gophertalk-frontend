@@ -105,5 +105,15 @@ watch(
   .logout-wrapper {
     display: none;
   }
+
+  .container {
+    padding: 0 44px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    padding: 0 32px;
+  }
 }
 </style>
