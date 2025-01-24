@@ -1,27 +1,10 @@
 {
   "pages": {
     "auth": {
-      "userName": "Имя пользователя",
-      "password": "Пароль",
-      "passwordConfirm": "Повторите пароль",
-      "firstName": "Ваше имя",
-      "lastName": "Ваша фамилия",
-      "login": "Войти",
       "noAccount": "Нет аккаунта?",
       "hasAccount": "Есть аккаунт?",
       "signUp": "Зарегистрироваться",
-      "errors": {
-        "userNameIsRequired": "Введите имя пользователя",
-        "firstNameIsRequired": "Введите имя",
-        "lastNameIsRequired": "Введите фамилию",
-        "passwordIsRequired": "Введите пароль",
-        "nameLength": "Длина должна быть от {min} до {max} символов",
-        "userNameAlphaNumericUnderscore": "Имя пользователя должно содержать буквы, цифры и нижнее подчеркивание",
-        "userNameStartsWithAlpha": "Имя пользователя должно начинаться с буквы",
-        "passwordRule": "Пароль должен быть длиной от 5 до 30 символов, содержать хотя бы одну букву (заглавную или строчную), включать хотя бы одну цифру и содержать хотя бы один специальный символ",
-        "passwordMustMatch": "Пароли не совпадают",
-        "onlyUnicode": "Используйте только символы Unicode"
-      }
+      "login": "Войти"
     },
     "main": {
       "header": {
@@ -39,6 +22,9 @@
       "general": "Общие",
       "account": "Аккаунт",
       "logout": "Выйти"
+    },
+    "general": {
+      "saveChanges": "Сохранить изменения"
     }
   },
   "widgets": {
@@ -56,6 +42,30 @@
     "profileHeader": {
       "myPosts": "Мои посты",
       "settings": "Настройки"
+    },
+    "personalDataForm": {
+      "userName": "Имя пользователя",
+      "password": "Пароль",
+      "passwordConfirm": "Повторите пароль",
+      "firstName": "Ваше имя",
+      "lastName": "Ваша фамилия"
+    },
+    "loginForm": {
+      "userName": "Имя пользователя",
+      "password": "Пароль",
+      "login": "Войти"
     }
+  },
+  "errors": {
+    "userNameIsRequired": "Введите имя пользователя",
+    "firstNameIsRequired": "Введите имя",
+    "lastNameIsRequired": "Введите фамилию",
+    "passwordIsRequired": "Введите пароль",
+    "nameLength": "Длина должна быть от {min} до {max} символов",
+    "userNameAlphaNumericUnderscore": "Имя пользователя должно содержать буквы, цифры и нижнее подчеркивание",
+    "userNameStartsWithAlpha": "Имя пользователя должно начинаться с буквы",
+    "passwordRule": "Пароль должен быть длиной от 5 до 30 символов, содержать хотя бы одну букву (заглавную или строчную), включать хотя бы одну цифру и содержать хотя бы один специальный символ",
+    "passwordMustMatch": "Пароли не совпадают",
+    "onlyUnicode": "Используйте только символы Unicode"
   }
 }

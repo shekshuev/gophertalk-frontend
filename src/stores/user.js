@@ -1,5 +1,5 @@
 import { performLogin, performRegister } from "@/services/auth";
-import { getUserById } from "@/services/user";
+import { getUserById, updateUser } from "@/services/user";
 import { jwtDecode } from "jwt-decode";
 import { defineStore } from "pinia";
 import { computed, ref, watch } from "vue";
@@ -32,6 +32,13 @@ export const useUserStore = defineStore("user", () => {
     });
   }
 
+  function update(payload) {
+    updateUser(me.value.id, payload, accessToken.value).then(result => {
+      console.log(result);
+      me.value = result;
+    });
+  }
+
   function login(payload) {
     performLogin(payload).then(result => {
       accessToken.value = result.access_token;
@@ -50,5 +57,5 @@ export const useUserStore = defineStore("user", () => {
     }
   });
 
-  return { isLoggedIn, register, login, logout, me, accessToken, initials };
+  return { isLoggedIn, register, login, logout, me, accessToken, initials, update };
 });

@@ -1,57 +1,27 @@
 <script lang="js" setup>
+import LoginForm from "@/components/widgets/LoginForm.vue";
 import { useUserStore } from "@/stores/user";
-import { useForm } from "vee-validate";
 import { useI18n } from "vue-i18n";
-import { object, string } from "yup";
 
 const { t } = useI18n();
 
 const userStore = useUserStore();
 
-const { errors, handleSubmit, defineField } = useForm({
-  initialValues: {
-    userName: "",
-    password: ""
-  },
-  validationSchema: object({
-    userName: string().required(t("pages.auth.errors.userNameIsRequired")),
-    password: string().required(t("pages.auth.errors.passwordIsRequired"))
-  })
-});
-
-const [userName, userNameAttrs] = defineField("userName");
-const [password, passwordAttrs] = defineField("password");
-
-const onSubmit = handleSubmit(values => {
+const onSubmit = values => {
   userStore.login(values);
-});
+};
 </script>
 
 <template>
-  <form class="card" @submit.prevent="onSubmit">
-    <GTextInput
-      class="mb-4"
-      :label="t('pages.auth.userName')"
-      v-model="userName"
-      v-bind="userNameAttrs"
-      :error="errors.userName"
-    />
-    <GTextInput
-      class="mb-9"
-      type="password"
-      :label="t('pages.auth.password')"
-      v-model="password"
-      v-bind="passwordAttrs"
-      :error="errors.password"
-    />
-    <GButton type="submit">{{ t("pages.auth.login") }}</GButton>
+  <div class="card">
+    <LoginForm @submit="onSubmit" />
     <div class="no-account text-regular mt-7">
       {{ t("pages.auth.noAccount") }}
       <router-link :to="{ name: 'register' }" class="text-medium">{{
         t("pages.auth.signUp")
       }}</router-link>
     </div>
-  </form>
+  </div>
 </template>
 
 <style lang="css" scoped>
@@ -65,6 +35,7 @@ const onSubmit = handleSubmit(values => {
 
 .no-account {
   color: var(--neutral-black-600);
+  text-align: center;
 }
 
 .no-account a {

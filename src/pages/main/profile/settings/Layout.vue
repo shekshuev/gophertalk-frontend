@@ -32,7 +32,9 @@ const userStore = useUserStore();
           {{ t("pages.settings.account") }}
         </router-link>
       </div>
-      <router-view></router-view>
+      <div class="router-view__wrapper">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +57,8 @@ const userStore = useUserStore();
 }
 
 .settings__sidebar {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   padding: 40px 0;
   border-right: 1px solid var(--neutral-white-300);
 }
@@ -66,11 +69,16 @@ const userStore = useUserStore();
   color: var(--neutral-black-800);
   text-decoration: none;
   cursor: pointer;
+  max-height: min-content;
 }
 
 .settings__sidebar-link_active,
 .settings__sidebar-link:active,
 .settings__sidebar-link:hover {
   background: var(--neutral-white-200);
+}
+
+.router-view__wrapper {
+  padding: 40px 56px;
 }
 </style>

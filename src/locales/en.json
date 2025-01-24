@@ -1,27 +1,10 @@
 {
   "pages": {
     "auth": {
-      "userName": "Username",
-      "password": "Password",
-      "passwordConfirm": "Confirm password",
-      "firstName": "Your first name",
-      "lastName": " Your last name",
-      "login": "Log in",
       "noAccount": "Don't have an account?",
       "hasAccount": "Have an account?",
       "signUp": "Sign up",
-      "errors": {
-        "userNameIsRequired": "Username is required",
-        "firstNameIsRequired": "First name is required",
-        "lastNameIsRequired": "Last name is required",
-        "passwordIsRequired": "Password is required",
-        "nameLength": "Length must be from {min} to {max} characters",
-        "userNameAlphaNumericUnderscore": "Username must contain alphanumeric and underscore characters",
-        "userNameStartsWithAlpha": "Username must start with a letter",
-        "passwordRule": "The password must be between 5 and 30 characters long, contain at least one letter (uppercase or lowercase), include at least one number, and have at least one special character",
-        "passwordMustMatch": "Password must match",
-        "onlyUnicode": "Use only Unicode characters"
-      }
+      "login": "Log in"
     },
     "main": {
       "header": {
@@ -39,6 +22,9 @@
       "general": "General",
       "account": "Account",
       "logout": "Logout"
+    },
+    "general": {
+      "saveChanges": "Save changes"
     }
   },
   "widgets": {
@@ -56,6 +42,30 @@
     "profileHeader": {
       "myPosts": "My posts",
       "settings": "Settings"
+    },
+    "personalDataForm": {
+      "userName": "Username",
+      "password": "Password",
+      "passwordConfirm": "Confirm password",
+      "firstName": "Your first name",
+      "lastName": " Your last name"
+    },
+    "loginForm": {
+      "userName": "Username",
+      "password": "Password",
+      "login": "Log in"
     }
+  },
+  "errors": {
+    "userNameIsRequired": "Username is required",
+    "firstNameIsRequired": "First name is required",
+    "lastNameIsRequired": "Last name is required",
+    "passwordIsRequired": "Password is required",
+    "nameLength": "Length must be from {min} to {max} characters",
+    "userNameAlphaNumericUnderscore": "Username must contain alphanumeric and underscore characters",
+    "userNameStartsWithAlpha": "Username must start with a letter",
+    "passwordRule": "The password must be between 5 and 30 characters long, contain at least one letter (uppercase or lowercase), include at least one number, and have at least one special character",
+    "passwordMustMatch": "Password must match",
+    "onlyUnicode": "Use only Unicode characters"
   }
 }
