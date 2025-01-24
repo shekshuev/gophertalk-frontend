@@ -42,3 +42,17 @@ export async function updateUser(
     throw new Error(response.error);
   }
 }
+
+export async function deleteUser(id, accessToken) {
+  const rawResponse = await fetch(`${import.meta.env.VITE_APP_API_URL}/users/${id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+  if (!rawResponse.ok) {
+    throw new Error(response.error);
+  }
+}

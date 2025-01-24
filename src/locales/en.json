@@ -54,6 +54,11 @@
       "userName": "Username",
       "password": "Password",
       "login": "Log in"
+    },
+    "deleteAccount": {
+      "title": "Delete account",
+      "subtitle": "This action is irreversible and will permanently delete all your data associated with the account.",
+      "submit": "Delete my account"
     }
   },
   "errors": {
