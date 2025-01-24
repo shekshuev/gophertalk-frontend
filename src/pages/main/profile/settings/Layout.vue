@@ -31,6 +31,9 @@ const userStore = useUserStore();
         >
           {{ t("pages.settings.account") }}
         </router-link>
+        <a class="settings__sidebar-link" @click="userStore.logout">{{
+          t("pages.settings.logout")
+        }}</a>
       </div>
       <div class="router-view__wrapper">
         <router-view></router-view>
