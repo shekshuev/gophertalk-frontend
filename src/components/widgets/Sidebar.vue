@@ -22,6 +22,8 @@ const menu = computed(() => [
     icon: "user"
   }
 ]);
+
+console.log(route);
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const menu = computed(() => [
       <div class="sidebar__menu">
         <router-link
           class="sidebar__menu-item"
-          :class="{ 'sidebar__menu-item_current': item.to.name === route.name }"
+          :class="{ 'sidebar__menu-item_current': route.path.startsWith(`/${item.to.name}`) }"
           v-for="item in menu"
           :key="item.id"
           :to="item.to"

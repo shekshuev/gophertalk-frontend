@@ -4,13 +4,14 @@ import { useUserStore } from "@/stores/user";
 import { debounce } from "lodash";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const { t } = useI18n();
 
 const userStore = useUserStore();
 const postStore = usePostStore();
 const router = useRouter();
+const route = useRoute();
 
 const search = ref("");
 
@@ -40,6 +41,7 @@ watch(
     </router-link>
     <div class="search-wrapper">
       <GTextInput
+        v-if="route.name === 'feed'"
         class="search"
         type="text"
         :with-label="false"

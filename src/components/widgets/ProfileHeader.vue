@@ -1,9 +1,11 @@
 <script setup lang="js">
 import { useUserStore } from "@/stores/user";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 
 const userStore = useUserStore();
 const { t } = useI18n();
+const route = useRoute();
 </script>
 
 <template>
@@ -22,11 +24,16 @@ const { t } = useI18n();
     <div class="profile-header__links">
       <router-link
         class="profile-header__link"
+        :class="{ 'profile-header__link_active': route.path.includes('posts') }"
         :to="{ name: 'my-posts', params: { id: userStore.me?.id || 0 } }"
       >
         {{ t("widgets.profileHeader.myPosts") }}
       </router-link>
-      <router-link class="profile-header__link" :to="{ name: 'settings' }">
+      <router-link
+        class="profile-header__link"
+        :class="{ 'profile-header__link_active': route.path.includes('settings') }"
+        :to="{ name: 'settings' }"
+      >
         {{ t("widgets.profileHeader.settings") }}
       </router-link>
     </div>
@@ -91,7 +98,7 @@ const { t } = useI18n();
 
 .profile-header__link:active,
 .profile-header__link:hover,
-.profile-header__active {
+.profile-header__link_active {
   color: var(--neutral-black-900);
 }
 </style>
