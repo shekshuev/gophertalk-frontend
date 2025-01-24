@@ -101,4 +101,11 @@ const route = useRoute();
 .profile-header__link_active {
   color: var(--neutral-black-900);
 }
+
+@media screen and (max-width: 576px) {
+  .profile-header {
+    border-radius: 0;
+    border: none;
+  }
+}
 </style>

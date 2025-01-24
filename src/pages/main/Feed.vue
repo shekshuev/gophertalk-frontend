@@ -34,10 +34,17 @@ useInfiniteScroll(postsEl, postStore.loadPosts, {
 <style scoped>
 .posts {
   width: 100%;
+  padding: 20px 0;
   height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+@media screen and (max-width: 936px) {
+  .posts {
+    padding: 10px 0;
+  }
 }
 </style>

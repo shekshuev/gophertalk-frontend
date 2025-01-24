@@ -16,5 +16,12 @@ import ProfileHeader from "@/components/widgets/ProfileHeader.vue";
   gap: 32px;
   overflow-y: auto;
   height: 100%;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 936px) {
+  .profile__wrapper {
+    padding: 10px 0;
+  }
 }
 </style>

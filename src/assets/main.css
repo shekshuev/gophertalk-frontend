@@ -55,10 +55,7 @@ body {
     width: 100%;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-  }
-
-  body {
-    background: var(--neutral-white-900);
+    padding: 0;
   }
 }
 

@@ -95,4 +95,11 @@ const onSubmit = handleSubmit(values => {
   justify-content: center;
   background: var(--neutral-white-100);
 }
+
+@media screen and (max-width: 576px) {
+  .post-form {
+    border-radius: 0;
+    border: none;
+  }
+}
 </style>

@@ -194,10 +194,17 @@ onMounted(() => {
 .post-card__replies-wrapper {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   display: grid;
   gap: 32px;
   padding: 0 32px 32px 32px;
   max-height: 350px;
+}
+
+@media screen and (max-width: 576px) {
+  .post-card {
+    border-radius: 0;
+    border: none;
+  }
 }
 </style>

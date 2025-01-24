@@ -64,6 +64,7 @@ const userStore = useUserStore();
   flex-direction: column;
   padding: 40px 0;
   border-right: 1px solid var(--neutral-white-300);
+  border-bottom: none;
 }
 
 .settings__sidebar-link {
@@ -83,5 +84,36 @@ const userStore = useUserStore();
 
 .router-view__wrapper {
   padding: 40px 56px;
+}
+
+@media screen and (max-width: 936px) {
+  .settings__header {
+    display: none;
+  }
+
+  .settings__content {
+    display: grid;
+    grid-template-columns: unset;
+  }
+
+  .settings__sidebar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    border-right: unset;
+    border-bottom: 1px solid var(--neutral-white-300);
+  }
+
+  .settings__sidebar-link {
+    padding: 10px 0;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .settings {
+    border-radius: 0;
+    border: none;
+  }
 }
 </style>

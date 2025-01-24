@@ -28,18 +28,16 @@ import Sidebar from "@/components/widgets/Sidebar.vue";
   background: var(--neutral-white-900);
   height: 80px;
 }
-main.container {
-  padding: 40px 0;
-}
 
 .sidebar-wrapper {
   grid-column: span 3;
+  padding-top: 20px;
 }
 
 .router-view__wrapper {
   grid-column: span 9;
-  max-height: calc(100vh - 80px - 80px);
-  height: calc(100vh - 80px - 80px);
+  max-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
 }
 
 .bottom-navigation__wrapper {
@@ -57,12 +55,8 @@ main.container {
 
   .router-view__wrapper {
     grid-column: span 9;
-    max-height: calc(100vh - 80px - 20px - 72px);
-    height: calc(100vh - 80px - 20px - 72px);
-  }
-
-  main.container {
-    padding: 10px 0;
+    max-height: calc(100vh - 80px - 72px);
+    height: calc(100vh - 80px - 72px);
   }
 }
 </style>

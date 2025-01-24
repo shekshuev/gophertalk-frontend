@@ -19,7 +19,7 @@ const route = useRoute();
     <router-link
       :to="{ name: 'profile', params: { id: userStore.me.id } }"
       class="bottom-navigation__link"
-      :class="{ 'bottom-navigation__link_active': 'profile' === route.name }"
+      :class="{ 'bottom-navigation__link_active': route.path.startsWith('/profile') }"
     >
       <GIcon name="user" />
     </router-link>
@@ -33,6 +33,7 @@ const route = useRoute();
   justify-content: space-around;
   align-items: center;
   height: 100%;
+  border-top: 1px solid var(--neutral-white-300);
 }
 
 .bottom-navigation__avatar {
