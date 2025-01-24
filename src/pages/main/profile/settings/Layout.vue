@@ -8,7 +8,6 @@ const { t } = useI18n();
 const route = useRoute();
 
 const userStore = useUserStore();
-console.log(route);
 </script>
 
 <template>
