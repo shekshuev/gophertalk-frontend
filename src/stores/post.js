@@ -132,7 +132,7 @@ export const usePostStore = defineStore("post", () => {
     try {
       const response = await makePost(params, userStore.accessToken);
       if (params.replyToId > 0 && post) {
-        if (Array.isArray(post.replyToId)) {
+        if (Array.isArray(post.replies)) {
           post.replies.push({
             ...response,
             user: {
@@ -155,6 +155,7 @@ export const usePostStore = defineStore("post", () => {
             }
           ];
         }
+        post.replies_count++;
       } else {
         posts.value.unshift({
           ...response,

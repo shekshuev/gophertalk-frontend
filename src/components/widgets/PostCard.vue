@@ -26,6 +26,7 @@ const initials = computed(() => {
 
 const likes = computed(() => shortenNumber(post.likes_count));
 const views = computed(() => shortenNumber(post.views_count));
+const replies = computed(() => shortenNumber(post.replies_count));
 
 const showReplies = ref(false);
 
@@ -79,7 +80,7 @@ onMounted(() => {
     <div class="post-card__body text-regular">{{ post.text }}</div>
     <div class="post-card__footer">
       <span @click="showReplies = true" class="post-card__replies">
-        <GIcon name="comment" />
+        <GIcon name="comment" />{{ replies }}
       </span>
       <span class="post-card__views"><GIcon name="eye" />{{ views }}</span>
       <span
