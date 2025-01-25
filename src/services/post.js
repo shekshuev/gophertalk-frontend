@@ -1,7 +1,10 @@
-export async function getAllPosts({ limit, offset, replyToId, search }, accessToken) {
+export async function getAllPosts({ limit, offset, replyToId, ownerId, search }, accessToken) {
   const params = { limit: limit, offset: offset };
   if (+replyToId > 0) {
     params.reply_to_id = replyToId;
+  }
+  if (+ownerId > 0) {
+    params.owner_id = ownerId;
   }
   if (search && ("" + search).length > 0) {
     params.search = search;

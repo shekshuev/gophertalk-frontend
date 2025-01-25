@@ -19,6 +19,14 @@ export const usePostStore = defineStore("post", () => {
 
   const canLoadPosts = ref(true);
 
+  const myPosts = ref([]);
+  const canLoadMyPosts = ref(true);
+  const myParams = ref({
+    limit: 10,
+    offset: 0,
+    ownerId: userStore.me?.id
+  });
+
   function setSearch(search) {
     if (search) {
       if (params.value.search) {
@@ -61,6 +69,23 @@ export const usePostStore = defineStore("post", () => {
           } else {
             posts.value.push(...result);
             params.value.offset += params.value.limit;
+          }
+        }
+      });
+    }
+  }
+
+  function loadMyPosts() {
+    if (canLoadMyPosts.value && userStore.me?.id > 0) {
+      getAllPosts(myParams.value, userStore.accessToken).then(result => {
+        if (needReset.value) {
+          myPosts.value = result;
+        } else {
+          if (result.length === 0) {
+            canLoadMyPosts.value = false;
+          } else {
+            myPosts.value.push(...result);
+            myParams.value.offset += myParams.value.limit;
           }
         }
       });
@@ -148,8 +173,11 @@ export const usePostStore = defineStore("post", () => {
 
   return {
     posts,
+    myPosts,
     canLoadPosts,
+    canLoadMyPosts,
     loadPosts,
+    loadMyPosts,
     like,
     dislike,
     view,
