@@ -6,7 +6,16 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { object, string } from "yup";
 
-const { replyToId } = defineProps(["replyToId"]);
+const { post, replyToId } = defineProps({
+  post: {
+    type: Object,
+    required: false
+  },
+  replyToId: {
+    type: Number,
+    required: false
+  }
+});
 
 const { t } = useI18n();
 
@@ -29,7 +38,7 @@ const { errors, handleSubmit, defineField, resetForm } = useForm({
 const [text, textAttrs] = defineField("text");
 
 const onSubmit = handleSubmit(values => {
-  postStore.post({ ...values, replyToId }).then(() => resetForm());
+  postStore.post({ ...values, replyToId }, post).then(() => resetForm());
 });
 </script>
 

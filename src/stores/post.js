@@ -67,8 +67,7 @@ export const usePostStore = defineStore("post", () => {
     }
   }
 
-  const loadReplies = debounce(id => {
-    const post = posts.value.find(p => p.id === id);
+  const loadReplies = debounce(post => {
     if (post) {
       if (post.canLoadPosts === undefined) {
         post.canLoadPosts = true;
@@ -76,7 +75,7 @@ export const usePostStore = defineStore("post", () => {
         post.params = {
           limit: 10,
           offset: 0,
-          replyToId: id
+          replyToId: post.id
         };
       }
       if (post.canLoadPosts) {
@@ -104,13 +103,12 @@ export const usePostStore = defineStore("post", () => {
     viewPost(id, userStore.accessToken);
   }
 
-  async function post(params) {
+  async function post(params, post) {
     try {
       const response = await makePost(params, userStore.accessToken);
-      if (params.replyToId > 0) {
-        const post = posts.value.find(p => p.id === params.replyToId);
-        if (post) {
-          post.replies.unshift({
+      if (params.replyToId > 0 && post) {
+        if (Array.isArray(post.replyToId)) {
+          post.replies.push({
             ...response,
             user: {
               id: userStore.me.id,
@@ -119,6 +117,18 @@ export const usePostStore = defineStore("post", () => {
               user_name: userStore.me.user_name
             }
           });
+        } else {
+          post.replies = [
+            {
+              ...response,
+              user: {
+                id: userStore.me.id,
+                first_name: userStore.me.first_name,
+                last_name: userStore.me.last_name,
+                user_name: userStore.me.user_name
+              }
+            }
+          ];
         }
       } else {
         posts.value.unshift({

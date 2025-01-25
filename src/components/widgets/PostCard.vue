@@ -48,7 +48,7 @@ watch(
 
 watch(showReplies, newVal => {
   if (newVal) {
-    emit("load-replies", post.id);
+    emit("load-replies", post);
     useInfiniteScroll(postsEl, () => emit("load-replies", post.id), {
       canLoadMore: () => post.canLoadPosts
     });
@@ -91,17 +91,18 @@ onMounted(() => {
       </span>
     </div>
     <div v-if="showReplies" class="post-card__replies-wrapper" ref="replies">
-      <PostForm :reply-to-id="post.id" />
       <template v-if="Array.isArray(post.replies)">
         <PostCard
           v-for="reply in post.replies"
           :key="reply.id"
           :post="reply"
-          @like="$emit('like', reply.id)"
-          @dislike="$emit('dislike', reply.id)"
-          @view="$emit('view', reply.id)"
+          @like="$emit('like', $event)"
+          @dislike="$emit('dislike', $event)"
+          @view="$emit('view', $event)"
+          @load-replies="$emit('load-replies', $event)"
         />
       </template>
+      <PostForm :reply-to-id="post.id" :post="post" />
     </div>
   </div>
 </template>
