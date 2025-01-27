@@ -28,6 +28,10 @@
     },
     "myPosts": {
       "empty": "You don't have any posts yet"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "message": "The page you're looking for doesn't exist."
     }
   },
   "widgets": {

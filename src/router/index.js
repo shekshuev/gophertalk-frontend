@@ -1,6 +1,7 @@
 import AuthLayout from "@/pages/auth/Layout.vue";
 import LoginPage from "@/pages/auth/Login.vue";
 import RegisterPage from "@/pages/auth/Register.vue";
+import NotFound from "@/pages/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -47,6 +48,11 @@ const router = createRouter({
               ]
             }
           ]
+        },
+        {
+          path: "/:catchAll(.*)",
+          name: "not-found",
+          component: NotFound
         }
       ]
     },
