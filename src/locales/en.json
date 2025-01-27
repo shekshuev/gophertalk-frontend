@@ -25,6 +25,9 @@
     },
     "general": {
       "saveChanges": "Save changes"
+    },
+    "myPosts": {
+      "empty": "You don't have any posts yet"
     }
   },
   "widgets": {

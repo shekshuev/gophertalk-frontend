@@ -34,7 +34,6 @@ export const useUserStore = defineStore("user", () => {
 
   function update(payload) {
     updateUser(me.value.id, payload, accessToken.value).then(result => {
-      console.log(result);
       me.value = result;
     });
   }

@@ -1,7 +1,7 @@
 import { dislikePost, getAllPosts, likePost, makePost, viewPost } from "@/services/post";
 import { debounce } from "lodash";
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useUserStore } from "./user";
 
 export const usePostStore = defineStore("post", () => {
@@ -14,9 +14,7 @@ export const usePostStore = defineStore("post", () => {
   });
 
   const needReset = ref(false);
-
   const posts = ref([]);
-
   const canLoadPosts = ref(true);
 
   const myPosts = ref([]);
@@ -26,6 +24,10 @@ export const usePostStore = defineStore("post", () => {
     offset: 0,
     ownerId: userStore.me?.id
   });
+
+  const postsLoading = ref(false);
+  const myPostsLoading = ref(false);
+  const loading = computed(() => myPostsLoading.value || postsLoading.value);
 
   function setSearch(search) {
     if (search) {
@@ -59,36 +61,42 @@ export const usePostStore = defineStore("post", () => {
 
   function loadPosts() {
     if (canLoadPosts.value) {
-      getAllPosts(params.value, userStore.accessToken).then(result => {
-        if (needReset.value) {
-          posts.value = result;
-          needReset.value = false;
-        } else {
-          if (result.length === 0) {
-            canLoadPosts.value = false;
+      postsLoading.value = true;
+      getAllPosts(params.value, userStore.accessToken)
+        .then(result => {
+          if (needReset.value) {
+            posts.value = result;
+            needReset.value = false;
           } else {
-            posts.value.push(...result);
-            params.value.offset += params.value.limit;
+            if (result.length === 0) {
+              canLoadPosts.value = false;
+            } else {
+              posts.value.push(...result);
+              params.value.offset += params.value.limit;
+            }
           }
-        }
-      });
+        })
+        .finally(() => (postsLoading.value = false));
     }
   }
 
   function loadMyPosts() {
     if (canLoadMyPosts.value && userStore.me?.id > 0) {
-      getAllPosts(myParams.value, userStore.accessToken).then(result => {
-        if (needReset.value) {
-          myPosts.value = result;
-        } else {
-          if (result.length === 0) {
-            canLoadMyPosts.value = false;
+      myPostsLoading.value = true;
+      getAllPosts(myParams.value, userStore.accessToken)
+        .then(result => {
+          if (needReset.value) {
+            myPosts.value = result;
           } else {
-            myPosts.value.push(...result);
-            myParams.value.offset += myParams.value.limit;
+            if (result.length === 0) {
+              canLoadMyPosts.value = false;
+            } else {
+              myPosts.value.push(...result);
+              myParams.value.offset += myParams.value.limit;
+            }
           }
-        }
-      });
+        })
+        .finally(() => (myPostsLoading.value = false));
     }
   }
 
@@ -104,14 +112,17 @@ export const usePostStore = defineStore("post", () => {
         };
       }
       if (post.canLoadPosts) {
-        getAllPosts(post.params, userStore.accessToken).then(result => {
-          if (result.length === 0) {
-            post.canLoadPosts = false;
-          } else {
-            post.replies.push(...result);
-            post.params.offset += post.params.limit;
-          }
-        });
+        postsLoading.value = true;
+        getAllPosts(post.params, userStore.accessToken)
+          .then(result => {
+            if (result.length === 0) {
+              post.canLoadPosts = false;
+            } else {
+              post.replies.push(...result);
+              post.params.offset += post.params.limit;
+            }
+          })
+          .finally(() => (postsLoading.value = false));
       }
     }
   }, 500);
@@ -184,6 +195,7 @@ export const usePostStore = defineStore("post", () => {
     view,
     loadReplies,
     post,
-    setSearch
+    setSearch,
+    loading
   };
 });

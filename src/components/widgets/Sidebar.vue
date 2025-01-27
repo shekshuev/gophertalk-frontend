@@ -22,8 +22,6 @@ const menu = computed(() => [
     icon: "user"
   }
 ]);
-
-console.log(route);
 </script>
 
 <template>
