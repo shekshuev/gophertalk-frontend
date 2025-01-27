@@ -5,12 +5,13 @@ import ru from "@/locales/ru";
 import dayjs from "dayjs";
 import "dayjs/locale/en";
 import "dayjs/locale/ru";
-import relativeTime from "dayjs/plugin/relativeTime"; //if using
+import relativeTime from "dayjs/plugin/relativeTime";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import { createApp } from "vue";
 import { createI18n } from "vue-i18n";
 
-dayjs.extend(relativeTime); //if using
+dayjs.extend(relativeTime);
 dayjs.locale("en");
 
 import App from "./App.vue";
@@ -26,6 +27,9 @@ const i18n = createI18n({
   }
 });
 
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
 const app = createApp(App);
 app.use(i18n);
 app.provide("dayjs", dayjs);
@@ -36,7 +40,7 @@ Object.entries(ui).forEach(([path, definition]) => {
   app.component(componentName, definition.default);
 });
 
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 
 app.mount("#app");
