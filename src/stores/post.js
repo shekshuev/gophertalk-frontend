@@ -28,6 +28,7 @@ export const usePostStore = defineStore("post", () => {
   const postsLoading = ref(false);
   const myPostsLoading = ref(false);
   const loading = computed(() => myPostsLoading.value || postsLoading.value);
+  const error = ref(null);
 
   function setSearch(search) {
     if (search) {
@@ -62,6 +63,7 @@ export const usePostStore = defineStore("post", () => {
   function loadPosts() {
     if (canLoadPosts.value) {
       postsLoading.value = true;
+      error.value = null;
       getAllPosts(params.value, userStore.accessToken)
         .then(result => {
           if (needReset.value) {
@@ -76,6 +78,9 @@ export const usePostStore = defineStore("post", () => {
             }
           }
         })
+        .catch(err => {
+          error.value = err?.message || "" + err;
+        })
         .finally(() => (postsLoading.value = false));
     }
   }
@@ -83,6 +88,7 @@ export const usePostStore = defineStore("post", () => {
   function loadMyPosts() {
     if (canLoadMyPosts.value && userStore.me?.id > 0) {
       myPostsLoading.value = true;
+      error.value = null;
       getAllPosts(myParams.value, userStore.accessToken)
         .then(result => {
           if (needReset.value) {
@@ -95,6 +101,9 @@ export const usePostStore = defineStore("post", () => {
               myParams.value.offset += myParams.value.limit;
             }
           }
+        })
+        .catch(err => {
+          error.value = err?.message || "" + err;
         })
         .finally(() => (myPostsLoading.value = false));
     }
@@ -113,6 +122,7 @@ export const usePostStore = defineStore("post", () => {
       }
       if (post.canLoadPosts) {
         postsLoading.value = true;
+        error.value = null;
         getAllPosts(post.params, userStore.accessToken)
           .then(result => {
             if (result.length === 0) {
@@ -122,25 +132,38 @@ export const usePostStore = defineStore("post", () => {
               post.params.offset += post.params.limit;
             }
           })
+          .catch(err => {
+            error.value = err?.message || "" + err;
+          })
           .finally(() => (postsLoading.value = false));
       }
     }
   }, 500);
 
   function like(id) {
-    likePost(id, userStore.accessToken);
+    error.value = null;
+    likePost(id, userStore.accessToken).catch(err => {
+      error.value = err?.message || "" + err;
+    });
   }
 
   function dislike(id) {
-    dislikePost(id, userStore.accessToken);
+    error.value = null;
+    dislikePost(id, userStore.accessToken).catch(err => {
+      error.value = err?.message || "" + err;
+    });
   }
 
   function view(id) {
-    viewPost(id, userStore.accessToken);
+    error.value = null;
+    viewPost(id, userStore.accessToken).catch(err => {
+      error.value = err?.message || "" + err;
+    });
   }
 
   async function post(params, post) {
     try {
+      error.value = null;
       const response = await makePost(params, userStore.accessToken);
       if (params.replyToId > 0 && post) {
         if (Array.isArray(post.replies)) {
@@ -179,7 +202,7 @@ export const usePostStore = defineStore("post", () => {
         });
       }
     } catch (err) {
-      console.error(err);
+      error.value = err?.message || "" + err;
     }
   }
 
@@ -196,6 +219,7 @@ export const usePostStore = defineStore("post", () => {
     loadReplies,
     post,
     setSearch,
-    loading
+    loading,
+    error
   };
 });
