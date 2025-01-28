@@ -11,15 +11,20 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import { createApp } from "vue";
 import { createI18n } from "vue-i18n";
 
+let defaultLocale = import.meta.env.VITE_APP_DEFAULT_LOCALE;
+if (!["en", "ru"].includes(defaultLocale)) {
+  defaultLocale = "en";
+}
+
 dayjs.extend(relativeTime);
-dayjs.locale("en");
+dayjs.locale(defaultLocale);
 
 import App from "./App.vue";
 import router from "./router";
 
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
+  locale: defaultLocale,
   fallbackLocale: "en",
   messages: {
     en,

@@ -44,20 +44,20 @@ export async function getPostById(id, accessToken) {
   }
 }
 
-export function viewPost(id, accessToken) {
-  performPostAction(id, "POST", "view", accessToken);
+export async function viewPost(id, accessToken) {
+  await performPostAction(id, "POST", "view", accessToken);
 }
 
-export function likePost(id, accessToken) {
-  performPostAction(id, "POST", "like", accessToken);
+export async function likePost(id, accessToken) {
+  await performPostAction(id, "POST", "like", accessToken);
 }
 
-export function dislikePost(id, accessToken) {
-  performPostAction(id, "DELETE", "like", accessToken);
+export async function dislikePost(id, accessToken) {
+  await performPostAction(id, "DELETE", "like", accessToken);
 }
 
-function performPostAction(id, method, action, accessToken) {
-  fetch(`${import.meta.env.VITE_APP_API_URL}/posts/${id}/${action}`, {
+async function performPostAction(id, method, action, accessToken) {
+  await fetch(`${import.meta.env.VITE_APP_API_URL}/posts/${id}/${action}`, {
     method,
     headers: {
       Accept: "application/json",
